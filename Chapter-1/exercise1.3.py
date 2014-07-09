@@ -11,6 +11,7 @@ def findCounterfeit(coins):
     if len(coins) == 1:
         print "counterfeit is %s" % (coins[0])
     else:
+        print split_seq(coins, 3)
         chunk1 = split_seq(coins, 3)[0]
         chunk2 = split_seq(coins, 3)[1]
         chunk3 = split_seq(coins, 3)[2]
@@ -33,19 +34,27 @@ def findCounterfeit(coins):
                     print "counterfeit must be in chunk2"
                     print chunk2
                     findCounterfeit(chunk2)
-                else:
+                elif(sum(chunk2) > sum(chunk1)):
                     print "counterfeit must be in chunk1"
                     print chunk1
                     findCounterfeit(chunk1)
+                else:
+                    print "counterfeit must be in chunk3"
+                    print chunk3
+                    findCounterfeit(chunk3)
             elif (len(chunk1) == len(chunk3)):
                 if (sum(chunk1) > sum(chunk3)):
                     print "counterfeit must be in chunk3"
                     print chunk3
                     findCounterfeit(chunk3)
-                else:
+                elif(sum(chunk3) > sum(chunk1)):
                     print "counterfeit must be in chunk1"
                     print chunk1
                     findCounterfeit(chunk1)
+                else: 
+                    print "counterfeit must be in chunk2"
+                    print chunk2
+                    findCounterfeit(chunk2)
             else:
                 print "counterfeit must be in chunk2"
                 print chunk2
@@ -53,5 +62,5 @@ def findCounterfeit(coins):
 
 if __name__ == '__main__' :
     # "coins" is a list of Weights of coins
-    coins = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
+    coins = [2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
     findCounterfeit(coins)
